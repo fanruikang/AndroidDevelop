@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="simpNotes_primary_material_light">#000000</color>
+    <color name="simpNotes_dark">#343030</color>
+    <color name="simpNotes_background">#b3ffffff</color>
+    <color name="simpNotes_text_dark">#191717</color>
+    <color name="simpNotes_bottombar_background">#ffffff</color>
+</resources>

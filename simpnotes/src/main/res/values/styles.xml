@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="SimpNotes" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@color/simpNotes_primary_material_light</item>
+        <item name="android:colorBackground">@color/simpNotes_background</item>
+        <item name="android:colorForeground">@color/simpNotes_dark</item>
+        <item name="android:navigationBarColor">@color/simpNotes_dark</item>
+        <item name="android:windowBackground">@color/simpNotes_background</item>
+
+    </style>
+
+    <style name="simpnotes_bottombar_theme">
+        <item name="android:background">@color/simpNotes_bottombar_background</item>
+    </style>
+
+</resources>

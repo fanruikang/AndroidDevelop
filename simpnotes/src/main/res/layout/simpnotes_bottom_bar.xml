@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:background="@drawable/simpnote_buttombar_background"
+    android:orientation="horizontal"
+    android:padding="0dp"
+    android:weightSum="4">
+
+    <Button
+        android:id="@+id/note"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/simpnote_buttombar_note_selector"
+        android:padding="0dp" />
+
+    <Button
+        android:id="@+id/habit"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/simpnote_buttombar_habit_selector"
+        android:padding="0dp" />
+
+
+    <Button
+        android:id="@+id/notebook"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/simpnote_buttombar_notebook_selector"
+        android:padding="0dp" />
+
+    <Button
+        android:id="@+id/me"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/simpnote_buttombar_me_selector"
+        android:padding="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp" />
+</LinearLayout>
