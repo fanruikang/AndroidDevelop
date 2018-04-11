@@ -13,19 +13,20 @@
         android:theme="@style/SimpNotes"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/SimpNotes">
+            android:name=".ui.NoteActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.HabitActivity" />
+        <activity android:name=".ui.NotebookActivity"/>
+        <activity android:name=".ui.meActivity"/>
         <activity
             android:name=".ui.BaseActivity"
             android:theme="@style/SimpNotes"
             android:label="@string/app_name" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

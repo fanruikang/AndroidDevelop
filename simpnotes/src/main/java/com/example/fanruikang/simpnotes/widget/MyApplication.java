@@ -1,4 +1,4 @@
-package com.example.fanruikang.simpnotes;
+package com.example.fanruikang.simpnotes.widget;
 
 import android.app.Application;
 import android.content.Context;

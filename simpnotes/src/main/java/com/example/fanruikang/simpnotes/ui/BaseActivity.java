@@ -12,8 +12,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-
         LogUtil.d("BaseActivity",getClass().getSimpleName());
         ActivityCollector.addActivity(this);
     }
