@@ -150,15 +150,7 @@ public class MainActivity extends BaseActivity {
         SQLiteDatabase dbreader = todoDatabase.getReadableDatabase();
         Cursor cursor = dbreader.query("todo", null, null, null, null, null,
                         null);
-//        String[] datas = new String[cursor.getCount()];
         List<String> datas = new ArrayList<String>();
-//        if(cursor.moveToFirst()){
-//            for( int i = 0; cursor.moveToNext(); i++){
-////                datas[i] = cursor.getString(cursor.getColumnIndex("content"));
-//
-//
-//            }
-//        }
         if (cursor.moveToFirst()) {
             do {
                 datas.add(cursor.getString(cursor.getColumnIndex("content")));
