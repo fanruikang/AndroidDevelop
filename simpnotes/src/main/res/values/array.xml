@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_simpnote_note_item" >
+        <item>@st</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>fsafsf</item>
+        <item>王</item>
+        <item>紫</item>
+        <item>佳</item>
+        <item>我</item>
+        <item>爱</item>
+        <item>你</item>
+    </string-array>
+</resources>

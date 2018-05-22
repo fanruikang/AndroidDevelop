@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.fanruikang.simpnotes.R;
-import com.example.fanruikang.simpnotes.ui.BaseActivity;
-import com.example.fanruikang.simpnotes.ui.HabitActivity;
-import com.example.fanruikang.simpnotes.ui.NoteActivity;
-import com.example.fanruikang.simpnotes.ui.NotebookActivity;
-import com.example.fanruikang.simpnotes.ui.meActivity;
+import com.example.fanruikang.simpnotes.tool.LogUtil;
+import com.example.fanruikang.simpnotes.ui.MainActivity;
 
 /**
  * 项目名称：AndroidDevelop
@@ -29,7 +26,7 @@ import com.example.fanruikang.simpnotes.ui.meActivity;
 public class BottomBarLinearLayout extends LinearLayout {
     public BottomBarLinearLayout(final Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.simpnotes_bottom_bar,this);
+        LayoutInflater.from(context).inflate(R.layout.simpnote_bottom_bar,this);
         Button note = findViewById(R.id.note);
         Button habit = findViewById(R.id.habit);
         Button notebook = findViewById(R.id.notebook);
@@ -38,33 +35,37 @@ public class BottomBarLinearLayout extends LinearLayout {
         note.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_note = new Intent(context, NoteActivity.class);
+                LogUtil.d("runinfo","note is clicked");
+                Intent intent_note = new Intent(context, MainActivity.class);
                 context.startActivity(intent_note);
             }
         });
 
-        habit.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_habit = new Intent(context, HabitActivity.class);
-                context.startActivity(intent_habit);
-            }
-        });
-
-        notebook.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_notebook = new Intent(context, NotebookActivity.class);
-                context.startActivity(intent_notebook);
-            }
-        });
-
-        me.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_me = new Intent(context,meActivity.class);
-                context.startActivity(intent_me);
-            }
-        });
+//        habit.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LogUtil.d("runinfo","habit is clicked");
+//                Intent intent_habit = new Intent(context, HabitActivity.class);
+//                context.startActivity(intent_habit);
+//            }
+//        });
+//
+//        notebook.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LogUtil.d("runinfo","notebook is clicked");
+//                Intent intent_notebook = new Intent(context, NotebookActivity.class);
+//                context.startActivity(intent_notebook);
+//            }
+//        });
+//
+//        me.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LogUtil.d("runinfo","me is clicked");
+//                Intent intent_me = new Intent(context,meActivity.class);
+//                context.startActivity(intent_me);
+//            }
+//        });
     }
 }

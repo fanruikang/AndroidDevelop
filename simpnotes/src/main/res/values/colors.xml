@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="simpNotes_primary_material_light">#000000</color>
+    <color name="simpNotes_statebar">#232020</color>
+    <color name="simpNotes_statebar_text">#ffffff</color>
+    <color name="simpNotes_statebar_button_selected">#e500ff00</color>
+    <color name="simpNotes_statebar_button_normal">#ffffff</color>
+
+    <color name="simpNotes_text_normal">#000000</color>
     <color name="simpNotes_dark">#343030</color>
-    <color name="simpNotes_background">#b3ffffff</color>
+    <color name="simpNotes_background">#f0ffffff</color>
     <color name="simpNotes_text_dark">#191717</color>
-    <color name="simpNotes_bottombar_background">#ffffff</color>
+    <color name="simpNotes_bottombar_background">#f0ffffff</color>
+    <color name="simpNotes_toolbar_dark">#c60a0505</color>
+    <color name="simpNote_list_item_note_text">#c60a0505</color>
+    <color name="simpNote_list_item_note_background">#f0ffffff</color>
+    <color name="simpNote_list_item_note_selected">#bcffffff</color>
+    <color name="todo_item_color">#ffffff</color>
 </resources>

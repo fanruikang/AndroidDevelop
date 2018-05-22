@@ -1,20 +1,41 @@
 <resources>
 
-    <style name="SimpNotes" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="SimpNotes" parent="Theme.AppCompat.DayNight.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="colorPrimary">@color/simpNotes_primary_material_light</item>
+        <!--导航栏底色-->
+        <item name="colorPrimary">@color/simpNotes_toolbar_dark</item>
+        <!--状态栏底色-->
+        <item name="android:colorPrimaryDark">@color/simpNotes_statebar</item>
+        <!--导航栏上的标题颜色,这里的颜色还可以自己定义喜欢的类型-->
+        <item name="android:textColorPrimary">@color/simpNotes_statebar_text</item>
+        <!--按钮选中或者点击获得焦点后的颜色-->
+        <item name="colorAccent">@color/simpNotes_statebar_button_selected  </item>
+        <!--和 colorAccent相反，正常状态下按钮的颜色,如果我们的colorPrimary是深 色，一般设置这里为白色-->
+        <item name="colorControlNormal">@color/simpNotes_statebar_button_normal</item>
+        <!--Button按钮正常状态颜色,根据项目来定义-->
+        <item name="colorButtonNormal">@color/simpNotes_statebar_button_normal</item>
         <item name="android:colorBackground">@color/simpNotes_background</item>
-        <item name="android:colorForeground">@color/simpNotes_dark</item>
-        <item name="android:navigationBarColor">@color/simpNotes_dark</item>
+        <item name="android:colorForeground">@color/simpNotes_background</item>
+        <item name="android:navigationBarColor">@color/simpNotes_background</item>
+        <!--Activity窗口的颜色,注意：这个颜色值要通过color属性引进来-->
         <item name="android:windowBackground">@color/simpNotes_background</item>
+        <!--EditText 输入框中字体的颜色，colorPrimary如果设置深色，一般字体设置为 白色-->
+        <item name="editTextColor">@color/simpNotes_text_normal</item>
+        <item name="android:fontFamily">@font/roboto</item>
 
     </style>
 
-    <style name="simpnotes_bottombar_theme">
-        <item name="android:background">@color/simpNotes_bottombar_background</item>
+
+    <style name="simpnote_list_item_style_note" >
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/simpNote_list_item_note_text</item>
+        <item name="android:textSize">@dimen/simpnote_body_text</item>
+        <item name="android:background">@color/simpNote_list_item_note_background</item>
     </style>
 
 </resources>

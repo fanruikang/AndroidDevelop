@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.fanruikang.simpnotes.widget.TodoLinerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_todo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusableInTouchMode="false"
+    android:focusable="false"
+    android:scrollY="@dimen/edit_todo">
+
+
+    <EditText
+        android:id="@+id/edit_todo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_todo"
+        android:layout_gravity="center"
+
+        android:gravity="center"
+        android:padding="@dimen/todo_edit_padding"
+        android:text="@string/edit_todo"
+        android:textColor="@color/simpNotes_text_normal"
+        android:textColorLink="@color/simpNote_list_item_note_background"
+        android:textSize="@dimen/simnote_Headline"
+        android:visibility="visible" />
+
+
+    <com.example.fanruikang.simpnotes.widget.TodoView
+        android:id="@+id/rv_todo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="ifContentScrolls"></com.example.fanruikang.simpnotes.widget.TodoView>
+
+</com.example.fanruikang.simpnotes.widget.TodoLinerLayout>

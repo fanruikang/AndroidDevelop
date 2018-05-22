@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">简签</string>
     <string name="notes_item">notes_item</string>
+    <string name="simpnote_habit_toolbar_title">习惯</string>
+    <string name="simpnte_me_toolbar_title">我的</string>
+    <string name="simpnote_note_toolbar_title">简签</string>
+    <string name="simpnote_notebook_toolbar_title">笔记本</string>
+    <string name="edit_todo">添加ToDo</string>
+
 </resources>
