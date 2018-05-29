@@ -14,36 +14,72 @@
         android:layout_height="@dimen/simpnote_toolbar_height"
         android:layout_margin="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="60dp"
         android:background="@color/simpNotes_toolbar_dark"
         android:padding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/simpnote_note_toolbar_title"
         app:titleMargin="0dp" />
 
-    <com.example.fanruikang.simpnotes.widget.BottomBarLinearLayout
-        android:id="@+id/bottomBarLinearLayout"
+
+    <!--<com.example.fanruikang.simpnotes.widget.BottomBarLinearLayout-->
+    <!--android:id="@+id/bottomBarLinearLayout"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="4dp"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.0"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:background="@color/simpNote_list_item_note_background"
+        android:padding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorColor="@color/simpNote_list_item_note_background"
+        app:tabSelectedTextColor="@color/simpNotes_statebar_button_selected"
+        app:tabTextColor="@color/simpNotes_text_normal" />
 
-    <fragment
-        android:id="@+id/simpnote_fragment_item"
-        android:name="com.example.fanruikang.simpnotes.ui.ItemFragment"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:tag="simpnot_fragment"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBarLinearLayout"
+        android:layout_marginBottom="1dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/tab"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpnote_note_toolbar"
-        tools:layout="@layout/simpnote_fragment_item_list" />
+        app:layout_constraintTop_toBottomOf="@+id/simpnote_note_toolbar" />/>
+
+    <!--<fragment-->
+    <!--android:id="@+id/simpnote_fragment_item"-->
+    <!--android:name="com.example.fanruikang.simpnotes.ui.ItemFragment"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:tag="simpnot_fragment"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/bottomBarLinearLayout"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/simpnote_note_toolbar"-->
+    <!--tools:layout="@layout/simpnote_fragment_item_list" />-->
 
 
 </android.support.constraint.ConstraintLayout>

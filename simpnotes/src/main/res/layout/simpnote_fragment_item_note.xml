@@ -3,20 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/todo_margin_bottom"
     android:orientation="horizontal">
 
 
     <TextView
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/todo_margin_bottom"
         android:background="@color/todo_item_color"
+        android:checked="true"
         android:gravity="center"
-        android:padding="@dimen/todo_margin_bottom"
+        android:padding="@dimen/lv_item_padding"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/simpNotes_text_normal"
         android:textSize="@dimen/simnote_Headline" />
+
 
 </LinearLayout>

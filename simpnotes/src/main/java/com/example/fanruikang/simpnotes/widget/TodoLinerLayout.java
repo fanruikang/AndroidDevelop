@@ -80,7 +80,7 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
             LogUtil.d("ll_todo","onhide");
             mhide();
         }else {
-
+            LogUtil.d("ll_todo","onshou");
             mshow();
         }
         LogUtil.d("ll_todo","onstop");
@@ -117,7 +117,7 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
         editText.clearFocus();
         String name = String.valueOf(editText.getText());
         editTextHeight = editText.getHeight();
-        if( ! name.equals("添加ToDo") && ! name.equals("")){
+        if( !name.equals("添加ToDo") && ! name.equals("")){
             mhide();
         }
         //增加rv_todo高度
@@ -144,11 +144,12 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
     }
 
     public void mshow(){
+        LogUtil.d("ll_todo","showed");
         EditText editText = findViewById(R.id.edit_todo);
         LogUtil.d("ll_todo",""+editText.getText().toString());
-        if (editText.getText().toString().equals("添加ToDo"))
+        if (editText.getText().toString().equals("添加ToDo")||editText.getText().toString().equals(""))
         {
-            LogUtil.d("ll_todo","onshow");
+
             editText.setText("");
             editText.setFocusable(true);
             editText.setFocusableInTouchMode(true);
@@ -164,7 +165,7 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
                                scrollTo(0, 0);
                            }
                        },
-                9);
+                90);
         }
     }
     @Override

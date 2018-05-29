@@ -1,11 +1,18 @@
 package com.example.fanruikang.simpnotes.ui;
 
-import android.app.Fragment;
+
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fanruikang.simpnotes.R;
 
@@ -20,9 +27,22 @@ import com.example.fanruikang.simpnotes.R;
  */
 
 public class ItemFragment extends Fragment {
+    public static String TABLAYOUT_FRAGMENT = "tab_fragment";
+    private TextView txt;
+    private int type;
+
+    public static ItemFragment newInstance(int type) {
+        ItemFragment fragment = new ItemFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(TABLAYOUT_FRAGMENT, type);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     /**
@@ -53,6 +73,45 @@ public class ItemFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        final MainActivity mainActivity = (MainActivity) getActivity();
+        Log.d("MainActivity", "ToDo");
+        mainActivity.init();
+        final EditText editText = getView().findViewById(R.id.edit_todo);
+        ViewTreeObserver viewTreeObserver = editText.getViewTreeObserver();
+        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                EditText editText = getView().findViewById(R.id.edit_todo);
+                Rect rect = new Rect();
+                editText.getGlobalVisibleRect(rect);
+                String name = String.valueOf(editText.getText());
+
+                if (rect.bottom==0 && !name.equals("添加ToDo") && !name.equals("")){
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.insert(name);
+                    Log.d("MainActivity", "添加ToDo");
+
+                    Toast.makeText(mainActivity,"tianjiaotodo",Toast.LENGTH_SHORT).show();
+                    mainActivity.query();
+                    Log.d("MainActivity", "edit_hide"+rect.bottom);
+                    editText.setText("添加ToDo");
+                }
+
+
+        }});
+
+
+//        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (v.isFocused()) {
+//                    mainActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+//                } else {
+//                }
+//                mainActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+//            }
+//        });
+//
 
     }
 }

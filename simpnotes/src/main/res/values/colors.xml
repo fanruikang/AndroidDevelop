@@ -15,4 +15,5 @@
     <color name="simpNote_list_item_note_background">#f0ffffff</color>
     <color name="simpNote_list_item_note_selected">#bcffffff</color>
     <color name="todo_item_color">#ffffff</color>
+    <color name="simpNotes_todo_background">#8debdfde</color>
 </resources>

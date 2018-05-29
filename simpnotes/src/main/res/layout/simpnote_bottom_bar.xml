@@ -11,6 +11,7 @@
     android:padding="0dp"
     android:weightSum="4">
 
+
     <Button
         android:id="@+id/note"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -55,4 +56,5 @@
         android:padding="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp" />
+
 </LinearLayout>
