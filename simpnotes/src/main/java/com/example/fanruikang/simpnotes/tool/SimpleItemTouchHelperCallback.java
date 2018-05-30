@@ -18,10 +18,12 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter){
         mAdapter = adapter;
+        LogUtil.d("SimpleItemTouchHelperCallback","New");
     }
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        LogUtil.d("SimpleItemTouchHelperCallback","getMovementFlags");
         int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
 //        int swipeFlags = ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT;
         int swipeFlags = ItemTouchHelper.RIGHT ;
@@ -30,22 +32,26 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public boolean isLongPressDragEnabled() {
+        LogUtil.d("SimpleItemTouchHelperCallback","isLongPressDragEnabled");
         return false;
     }
 
     @Override
     public boolean isItemViewSwipeEnabled() {
+        LogUtil.d("SimpleItemTouchHelperCallback","isItemSwipeEnabled");
         return true;
     }
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         mAdapter.onItemMove(viewHolder.getAdapterPosition(),target.getAdapterPosition());
+        LogUtil.d("SimpleItemTouchHelperCallback","Onmove");
         return true;
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+        LogUtil.d("SimpleItemTouchHelperCallback","OnSwiped");
         mAdapter.onItemDissmiss(viewHolder.getAdapterPosition());
     }
 }

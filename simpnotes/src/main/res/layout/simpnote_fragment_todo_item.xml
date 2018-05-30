@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/todo_margin_bottom"
+        android:layout_marginLeft="@dimen/todo_margin_bottom"
+        android:layout_marginRight="@dimen/todo_margin_bottom"
         android:background="@color/todo_item_color"
         android:checked="true"
         android:gravity="center"

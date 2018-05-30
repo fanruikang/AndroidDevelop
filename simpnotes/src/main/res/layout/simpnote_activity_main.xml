@@ -79,7 +79,7 @@
     <!--app:layout_constraintEnd_toEndOf="parent"-->
     <!--app:layout_constraintStart_toStartOf="parent"-->
     <!--app:layout_constraintTop_toBottomOf="@+id/simpnote_note_toolbar"-->
-    <!--tools:layout="@layout/simpnote_fragment_item_list" />-->
+    <!--tools:layout="@laysimpnote_fragment_todo_listlist" />-->
 
 
 </android.support.constraint.ConstraintLayout>

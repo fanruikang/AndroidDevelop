@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends NoteBookFragment.BaseActivity {
     private TabLayout tab;
     private ViewPager viewpager;
     private TabAdapter adapter;
@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity {
 //                if((screenHeight==rect.bottom) && ! name.equals("添加ToDo") && ! name.equals("")){
 ////                    insert(name);
 //                    Log.d("MainActivity", "关闭输入法自动保存");
-//                    View view = getLayoutInflater().inflate(R.layout.simpnote_fragment_item_list,null);
+//                    View view = getLayoutInflater().inflate(R.layout.simpnote_fragment_todo_list,null);
 ////                    view.scrollTo(0,300);
 //                    Log.d("MainActivity", "RootLayoutchange"+view.getScrollY());
 //
@@ -137,7 +137,7 @@ public class MainActivity extends BaseActivity {
         List<Fragment> fragments = new ArrayList<>();
 
         fragments.add(new ItemFragment());
-        fragments.add(new HabitFragment());
+        fragments.add(new NoteBookFragment());
         fragments.add(new MeFragment());
 
 

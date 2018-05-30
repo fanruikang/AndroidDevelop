@@ -38,4 +38,20 @@
         <item name="android:background">@color/simpNote_list_item_note_background</item>
     </style>
 
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#2196f3</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#000000</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/simpNotes_background</item>
+        <item name="android:textStyle"></item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <!--<style name="MyTimePickerDialogStyle">-->
+        <!--<item name="android:colorPrimary">#FFFFFF</item>-->
+
+    <!--</style>-->
+
 </resources>

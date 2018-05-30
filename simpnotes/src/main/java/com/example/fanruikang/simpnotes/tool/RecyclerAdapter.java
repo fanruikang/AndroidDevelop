@@ -1,6 +1,11 @@
 package com.example.fanruikang.simpnotes.tool;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.fanruikang.simpnotes.R;
+import com.example.fanruikang.simpnotes.ui.AlarmActivity;
 import com.example.fanruikang.simpnotes.ui.MainActivity;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +36,7 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> implements ItemTouchHelperAdapter {
     private List<String> mDatas;
     private MainActivity.TodoDatabase mDatabase;
+    Calendar calendar = Calendar.getInstance();
     public RecyclerAdapter(List<String> data, MainActivity.TodoDatabase Database) {
         this.mDatas = data;
         this.mDatabase = Database;
@@ -41,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.simpnote_fragment_item_note, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.simpnote_fragment_todo_item, parent, false);
         return new VH(v);
     }
 
@@ -51,10 +60,35 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LogUtil.d("RecyclerAdapter","itemViewOnClick");
 //                //item 点击事件
 //                TextView textView = (TextView)v.findViewById(R.id.content);
-//                textView.getPaint().setFlags((textView.getPaint().getFlags() == Paint.STRIKE_THRU_TEXT_FLAG) ? 0
-//                        : Paint.STRIKE_THRU_TEXT_FLAG);
+//                textView.getPaint().setFlags((textView.getPaint().getFlags() == Paint.STRIKE_THRU_TEXT_FLAG) ? 0: Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                LogUtil.d("RecyclerAdapter","itemViewOnLongClick");
+                 final Calendar calendar = Calendar.getInstance();
+                 new TimePickerDialog(v.getContext(),0,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        Intent intent = new Intent(view.getContext(), AlarmActivity.class);
+                        TextView textView=v.findViewById(R.id.content);
+                        intent.putExtra("ToDo",textView.getText().toString());
+                        PendingIntent pendingIntent = PendingIntent.getActivity(view.getContext(),0,intent,0);
+                        Calendar calendar1 =  Calendar.getInstance();
+                        calendar1.setTimeInMillis(System.currentTimeMillis());
+                        calendar1.set(Calendar.HOUR,hourOfDay);
+                        calendar1.set(Calendar.MINUTE,minute);
+                        AlarmManager alarmManager = (AlarmManager)view.getContext().getSystemService(Context.ALARM_SERVICE);
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar1.getTimeInMillis(),pendingIntent);
+                    }
+                },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+
+                return false;
             }
         });
     }
@@ -62,6 +96,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
         //交换位置
+                LogUtil.d("RecyclerAdapter","onItemMove");
         Collections.swap(mDatas,fromPosition,toPosition);
         notifyItemMoved(fromPosition,toPosition);
     }
@@ -69,6 +104,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
     @Override
     public void onItemDissmiss(int position) {
         //移除数据
+                LogUtil.d("RecyclerAdapter","onItemDissmiss");
         ContentValues values = new ContentValues();
         values.put("isdeleted",1);
 
@@ -110,7 +146,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
         public final TextView title;
         public VH(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.content);
+                LogUtil.d("RecyclerAdapter","viewHolder");
+            title = v.findViewById(R.id.content);
         }
     }
 }
