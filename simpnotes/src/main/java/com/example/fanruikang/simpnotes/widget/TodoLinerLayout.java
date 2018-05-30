@@ -31,10 +31,10 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
 //    private ViewDragHelper mDragHelper;
 
     int editTextHeight;
-
+    EditText editText ;
     public TodoLinerLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LogUtil.d("ll_todo","oninit");
+        LogUtil.d("TodoLinerLayout","oninit");
 
 //        this.getViewTreeObserver();
 //        mDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelper.Callback() {
@@ -77,13 +77,13 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
     public void onStopNestedScroll(View child) {
 
         if (getScrollY()>(editTextHeight/5)) {
-            LogUtil.d("ll_todo","onhide");
+            LogUtil.d("TodoLinerLayout","onhide");
             mhide();
         }else {
-            LogUtil.d("ll_todo","onshou");
+            LogUtil.d("TodoLinerLayout","onshou");
             mshow();
         }
-        LogUtil.d("ll_todo","onstop");
+        LogUtil.d("TodoLinerLayout","onstop");
         super.onStopNestedScroll(child);
 
 
@@ -105,13 +105,13 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        LogUtil.d("ll_todo","onMeasure");
+        LogUtil.d("TodoLinerLayout","onMeasure");
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        LogUtil.d("ll_todo","Onlayout: "+this.getHeight());
+        LogUtil.d("TodoLinerLayout","Onlayout: "+this.getHeight());
         //取消选中edit_todo
         EditText editText = findViewById(R.id.edit_todo);
         editText.clearFocus();
@@ -144,9 +144,9 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
     }
 
     public void mshow(){
-        LogUtil.d("ll_todo","showed");
+        LogUtil.d("TodoLinerLayout","showed");
         EditText editText = findViewById(R.id.edit_todo);
-        LogUtil.d("ll_todo",""+editText.getText().toString());
+        LogUtil.d("TodoLinerLayout",""+editText.getText().toString());
         if (editText.getText().toString().equals("添加ToDo")||editText.getText().toString().equals(""))
         {
 
@@ -172,14 +172,14 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        LogUtil.d("ll_todo","ondraw");
+        LogUtil.d("TodoLinerLayout","ondraw");
     }
 
 //    @Override
 //    public boolean onTouchEvent(MotionEvent event) {
 //        switch (event.getAction()){
 //            case MotionEvent.ACTION_UP:
-//                LogUtil.d("ll_todo","ondraw"+todoView.getChildAt(0).getY());
+//                LogUtil.d("TodoLinerLayout","ondraw"+todoView.getChildAt(0).getY());
 //                if (todoView.canScrollVertically(1)==false && todoView.getChildAt(0).getY()>(editText.getHeight()/2)){
 //                    this.setScrollY(300);
 //                }

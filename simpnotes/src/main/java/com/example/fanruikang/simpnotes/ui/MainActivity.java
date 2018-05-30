@@ -38,7 +38,7 @@ public class MainActivity extends NoteBookFragment.BaseActivity {
 //    private int[] selectors = new int[]{R.drawable.simpnote_buttombar_note_selector,R.drawable.simpnote_buttombar_habit_selector,R.drawable.simpnote_buttombar_notebook_selector,R.drawable.simpnote_buttombar_me_selector};
     private int[] selectors = new int[]{R.drawable.simpnote_buttombar_note_selector,R.drawable.simpnote_buttombar_notebook_selector,R.drawable.simpnote_buttombar_me_selector};
 
-    final TodoDatabase todoDatabase = new TodoDatabase(this,"TodoList.db",null,4 );
+    final TodoDatabase todoDatabase = new TodoDatabase(this,"TodoList.db",null,7 );
 
     @Override
     protected void onResume() {
@@ -55,11 +55,7 @@ public class MainActivity extends NoteBookFragment.BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simpnote_activity_main);
-
         initviews();
-
-
-
 //
 //        query();
 //
@@ -223,8 +219,10 @@ public class MainActivity extends NoteBookFragment.BaseActivity {
     }
     public void init(){
         datas.clear();
+        Log.d("MainActivity", "init");
+
         SQLiteDatabase dbreader = todoDatabase.getReadableDatabase();
-        Cursor cursor = dbreader.rawQuery("select * from todo where isdeleted = ?",
+        Cursor cursor = dbreader.rawQuery(getString(R.string.selectingtodo),
                 new String[]{"0"});
 
         if (cursor.moveToFirst()) {
@@ -287,6 +285,7 @@ public class MainActivity extends NoteBookFragment.BaseActivity {
             for (int i = 0;i<strings.length;i++){
                 ContentValues values = new ContentValues();
                 values.put("content", strings[i]);
+                values.put("isdeleted","0");
                 db.insert("todo", null,values );
             }
         }

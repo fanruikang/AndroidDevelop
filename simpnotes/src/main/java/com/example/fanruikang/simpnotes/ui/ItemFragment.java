@@ -74,7 +74,7 @@ public class ItemFragment extends Fragment {
     public void onStart() {
         super.onStart();
         final MainActivity mainActivity = (MainActivity) getActivity();
-        Log.d("MainActivity", "ToDo");
+        Log.d("ItemFragment", "onStart");
         mainActivity.init();
         final EditText editText = getView().findViewById(R.id.edit_todo);
         ViewTreeObserver viewTreeObserver = editText.getViewTreeObserver();
@@ -85,33 +85,20 @@ public class ItemFragment extends Fragment {
                 Rect rect = new Rect();
                 editText.getGlobalVisibleRect(rect);
                 String name = String.valueOf(editText.getText());
+                Log.d("ItemFragment", "viewTreeObserver");
+                Log.d("ItemFragment", "viewTreeObserver"+name);
+                Log.d("ItemFragment", "viewTreeObserver"+rect.bottom);
 
-                if (rect.bottom==0 && !name.equals("添加ToDo") && !name.equals("")){
+                if (rect.bottom<50 && !name.equals("添加ToDo") && !name.equals("")){
+                    Log.d("ItemFragment", "添加");
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.insert(name);
-                    Log.d("MainActivity", "添加ToDo");
 
                     Toast.makeText(mainActivity,"tianjiaotodo",Toast.LENGTH_SHORT).show();
                     mainActivity.query();
-                    Log.d("MainActivity", "edit_hide"+rect.bottom);
+                    Log.d("ItemFragment", "edit_hide"+rect.bottom);
                     editText.setText("添加ToDo");
                 }
-
-
-        }});
-
-
-//        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (v.isFocused()) {
-//                    mainActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//                } else {
-//                }
-//                mainActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-//            }
-//        });
-//
-
+            }});
     }
 }

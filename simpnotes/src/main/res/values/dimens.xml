@@ -13,7 +13,7 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="todo_margin_bottom">2dp</dimen>
     <dimen name="todo_edit_padding">5dp</dimen>
-    <dimen name="edit_todo">300px</dimen>
+    <dimen name="edit_todo">80dp</dimen>
     <dimen name="todo_height">200dp</dimen>
     <dimen name="simpnote_time_picker_dialog_height">300dp</dimen>//medium
 

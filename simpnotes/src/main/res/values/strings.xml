@@ -6,5 +6,6 @@
     <string name="simpnote_note_toolbar_title">简签</string>
     <string name="simpnote_notebook_toolbar_title">笔记本</string>
     <string name="edit_todo">添加ToDo</string>
+    <string name="selectingtodo">select * from todo where isdeleted = ?</string>
 
 </resources>
