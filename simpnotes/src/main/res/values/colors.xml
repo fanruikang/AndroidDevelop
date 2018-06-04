@@ -10,7 +10,7 @@
     <color name="simpNotes_background">#f0ffffff</color>
     <color name="simpNotes_text_dark">#191717</color>
     <color name="simpNotes_bottombar_background">#f0ffffff</color>
-    <color name="simpNotes_toolbar_dark">#c60a0505</color>
+    <color name="simpNotes_toolbar_dark">#ff0a0505</color>
     <color name="simpNote_list_item_note_text">#c60a0505</color>
     <color name="simpNote_list_item_note_background">#f0ffffff</color>
     <color name="simpNote_list_item_note_selected">#bcffffff</color>

@@ -11,18 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SimpNotes"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        >
         <activity
-            android:name=".ui.NoteActivity"
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden|stateHidden"
             >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.HabitActivity" />
-        <activity android:name=".ui.NotebookActivity"/>
-        <activity android:name=".ui.meActivity"/>
+        <activity
+            android:name=".ui.AlarmActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.BaseActivity"
             android:theme="@style/SimpNotes"
@@ -30,6 +33,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
     </application>
 
 </manifest>

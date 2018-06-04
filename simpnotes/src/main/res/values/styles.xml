@@ -25,6 +25,7 @@
         <!--EditText 输入框中字体的颜色，colorPrimary如果设置深色，一般字体设置为 白色-->
         <item name="editTextColor">@color/simpNotes_text_normal</item>
         <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/simpNotes_text_normal</item>
 
     </style>
 

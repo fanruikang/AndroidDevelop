@@ -1,6 +1,5 @@
 package com.example.fanruikang.simpnotes.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
@@ -24,7 +23,7 @@ import java.io.IOException;
  * 修改备注：
  */
 
-public class AlarmActivity extends Activity{
+public class AlarmActivity extends BaseActivity{
     MediaPlayer mMediaPlayer;
 
     @Override
@@ -44,12 +43,12 @@ public class AlarmActivity extends Activity{
         new AlertDialog.Builder(AlarmActivity.this, R.style.MyAlertDialogStyle)
                 .setTitle("ToDo")
                 .setMessage(getIntent().getStringExtra("ToDo").toString())
-                .setCancelable(true)
+                .setCancelable(false)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-                        AlarmActivity.this.finish();
-                        mMediaPlayer.stop();
+//                        AlarmActivity.this.finish();
+//                        mMediaPlayer.stop();
                     }
                 })
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {

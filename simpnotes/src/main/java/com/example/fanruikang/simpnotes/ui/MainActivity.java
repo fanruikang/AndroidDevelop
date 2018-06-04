@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends NoteBookFragment.BaseActivity {
+public class MainActivity extends BaseActivity {
     private TabLayout tab;
     private ViewPager viewpager;
     private TabAdapter adapter;
@@ -260,7 +260,7 @@ public class MainActivity extends NoteBookFragment.BaseActivity {
         public TodoDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
             mContext = context;
-        }
+    }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -36,7 +36,6 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> implements ItemTouchHelperAdapter {
     private List<String> mDatas;
     private MainActivity.TodoDatabase mDatabase;
-    Calendar calendar = Calendar.getInstance();
     public RecyclerAdapter(List<String> data, MainActivity.TodoDatabase Database) {
         this.mDatas = data;
         this.mDatabase = Database;
@@ -71,13 +70,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
             public boolean onLongClick(final View v) {
                 LogUtil.d("RecyclerAdapter","itemViewOnLongClick");
                  final Calendar calendar = Calendar.getInstance();
-                 new TimePickerDialog(v.getContext(),0,
-                new TimePickerDialog.OnTimeSetListener() {
+                 new TimePickerDialog(v.getContext(),0, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                LogUtil.d("RecyclerAdapter77","onTimeSet");
+                LogUtil.d("RecyclerAdapter77","onTimeSet"+hourOfDay+":"+minute);
                         Intent intent = new Intent(view.getContext(), AlarmActivity.class);
                         TextView textView=v.findViewById(R.id.content);
                         intent.putExtra("ToDo",textView.getText().toString());
+//                        view.getContext().startActivity(intent);
                         PendingIntent pendingIntent = PendingIntent.getActivity(view.getContext(),0,intent,0);
                         Calendar calendar1 =  Calendar.getInstance();
                         calendar1.setTimeInMillis(System.currentTimeMillis());
