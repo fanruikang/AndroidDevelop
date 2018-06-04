@@ -74,7 +74,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 LogUtil.d("RecyclerAdapter77","onTimeSet");
-                LogUtil.d("RecyclerAdapter77","onTimeSet"+hourOfDay+":"+minute);
+                LogUtil.d("RecyclerAdapter77","onTimeSet"+hourOfDay+":::::"+minute);
                         Intent intent = new Intent(view.getContext(), AlarmActivity.class);
                         TextView textView=v.findViewById(R.id.content);
                         intent.putExtra("ToDo",textView.getText().toString());
@@ -82,10 +82,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
                         PendingIntent pendingIntent = PendingIntent.getActivity(view.getContext(),0,intent,0);
                         Calendar calendar1 =  Calendar.getInstance();
                         calendar1.setTimeInMillis(System.currentTimeMillis());
-                        calendar1.set(Calendar.HOUR,hourOfDay);
                         calendar1.set(Calendar.MINUTE,minute);
+                        calendar1.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                LogUtil.d("RecyclerAdapter77","onTimeSet"+hourOfDay+":::::"+minute+calendar1.getTime().toString());
+                LogUtil.d("RecyclerAdapter77","onTimeSet"+hourOfDay+":::::"+minute+calendar1.getTimeInMillis());
                         AlarmManager alarmManager = (AlarmManager)view.getContext().getSystemService(Context.ALARM_SERVICE);
-                        alarmManager.setExact(AlarmManager.RTC_WAKEUP,calendar1.getTimeInMillis(),pendingIntent);
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis() ,pendingIntent);
                     }
                 },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
 

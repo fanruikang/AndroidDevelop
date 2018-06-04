@@ -10,19 +10,6 @@
     android:scrollY="@dimen/edit_todo">
 
 
-    <EditText
-        android:id="@+id/edit_me"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-
-        android:padding="@dimen/todo_edit_padding"
-        android:text="@string/edit_todo"
-        android:textColor="@color/simpNotes_text_normal"
-        android:textColorLink="@color/simpNote_list_item_note_background"
-        android:textSize="@dimen/simnote_Headline"
-        android:visibility="visible" />
 </LinearLayout>
 
 
