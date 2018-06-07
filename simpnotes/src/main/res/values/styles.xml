@@ -20,8 +20,8 @@
         <item name="android:colorBackground">@color/simpNotes_background</item>
         <item name="android:colorForeground">@color/simpNotes_background</item>
         <item name="android:navigationBarColor">@color/simpNotes_background</item>
-        <!--Activity窗口的颜色,注意：这个颜色值要通过color属性引进来-->
-        <item name="android:windowBackground">@color/simpNotes_background</item>
+        <!--&lt;!&ndash;Activity窗口的颜色,注意：这个颜色值要通过color属性引进来&ndash;&gt;-->
+        <!--<item name="android:windowBackground">@color/simpNotes_background</item>-->
         <!--EditText 输入框中字体的颜色，colorPrimary如果设置深色，一般字体设置为 白色-->
         <item name="editTextColor">@color/simpNotes_text_normal</item>
         <item name="android:fontFamily">@font/roboto</item>

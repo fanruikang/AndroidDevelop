@@ -15,4 +15,6 @@ public interface ItemTouchHelperAdapter {
     void onItemMove(int fromPosition,int toPosition);
     //数据删除
     void onItemDissmiss(int position);
+
+    void onItemAppear(int adapterPosition);
 }

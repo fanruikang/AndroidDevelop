@@ -76,12 +76,12 @@ public class ItemFragment extends Fragment {
         final MainActivity mainActivity = (MainActivity) getActivity();
         Log.d("ItemFragment", "onStart");
         mainActivity.init();
-        final EditText editText = getView().findViewById(R.id.edit_todo);
+        final EditText editText = (EditText) getView().findViewById(R.id.edit_todo);
         ViewTreeObserver viewTreeObserver = editText.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                EditText editText = getView().findViewById(R.id.edit_todo);
+                EditText editText = (EditText) getView().findViewById(R.id.edit_todo);
                 Rect rect = new Rect();
                 editText.getGlobalVisibleRect(rect);
                 String name = String.valueOf(editText.getText());
