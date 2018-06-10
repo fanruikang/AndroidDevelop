@@ -317,7 +317,10 @@ public class MainActivity extends BaseActivity {
 
                 if (cursor.moveToFirst()) {
                     do {
-                        datas.add(cursor.getString(cursor.getColumnIndex("content")));
+                        datas.add(cursor.getString(cursor.getColumnIndex(
+
+
+                                "content")));
                     } while (cursor.moveToNext());
                 }
 
