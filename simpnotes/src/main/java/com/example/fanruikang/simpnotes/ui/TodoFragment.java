@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fanruikang.simpnotes.R;
+import com.example.fanruikang.simpnotes.tool.LogUtil;
 
 /**
  * 项目名称：AndroidDevelop
@@ -26,13 +27,13 @@ import com.example.fanruikang.simpnotes.R;
  * 修改备注：
  */
 
-public class ItemFragment extends Fragment {
+public class TodoFragment extends Fragment {
     public static String TABLAYOUT_FRAGMENT = "tab_fragment";
     private TextView txt;
     private int type;
 
-    public static ItemFragment newInstance(int type) {
-        ItemFragment fragment = new ItemFragment();
+    public static TodoFragment newInstance(int type) {
+        TodoFragment fragment = new TodoFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(TABLAYOUT_FRAGMENT, type);
         fragment.setArguments(bundle);
@@ -40,6 +41,8 @@ public class ItemFragment extends Fragment {
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        LogUtil.d("TodoFragment","onCreate");
+
         super.onCreate(savedInstanceState);
 
 
@@ -66,15 +69,17 @@ public class ItemFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        LogUtil.d("TodoFragment","onCreateView");
             View view = inflater.inflate(R.layout.simpnote_fragment_todo_list,container,false);
     return view;
     }
 
     @Override
     public void onStart() {
+        LogUtil.d("TodoFragment","onStart");
         super.onStart();
         final MainActivity mainActivity = (MainActivity) getActivity();
-        Log.d("ItemFragment", "onStart");
+        Log.d("TodoFragment", "onStart");
         mainActivity.init();
         final EditText editText = (EditText) getView().findViewById(R.id.edit_todo);
         ViewTreeObserver viewTreeObserver = editText.getViewTreeObserver();
@@ -85,20 +90,51 @@ public class ItemFragment extends Fragment {
                 Rect rect = new Rect();
                 editText.getGlobalVisibleRect(rect);
                 String name = String.valueOf(editText.getText());
-                Log.d("ItemFragment", "viewTreeObserver");
-                Log.d("ItemFragment", "viewTreeObserver"+name);
-                Log.d("ItemFragment", "viewTreeObserver"+rect.bottom);
+                Log.d("TodoFragment.onStart", "viewTreeObserver");
+                Log.d("TodoFragment.onStart", "viewTreeObserver"+name);
+                Log.d("TodoFragment.onStart", "viewTreeObserver"+rect.bottom);
 
                 if (rect.bottom<50 && !name.equals("添加ToDo") && !name.equals("")){
-                    Log.d("ItemFragment", "添加");
+                    Log.d("TodoFragment", "添加");
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.insert(name);
 
                     Toast.makeText(mainActivity,"tianjiaotodo",Toast.LENGTH_SHORT).show();
                     mainActivity.query();
-                    Log.d("ItemFragment", "edit_hide"+rect.bottom);
+                    Log.d("TodoFragment", "edit_hide"+rect.bottom);
                     editText.setText("添加ToDo");
                 }
             }});
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if ((isVisibleToUser && isResumed())) {
+        LogUtil.d("TodoFragment","isVisibleToUser");
+            onResume();
+        } else if (!isVisibleToUser) {
+        LogUtil.d("TodoFragment","isNotVisibleToUser");
+            onPause();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        LogUtil.d("TodoFragment","onPause");
+        super.onPause();
+
+    }
+
+    @Override
+    public void onResume() {
+        LogUtil.d("TodoFragment","onResume");
+        super.onResume();
+        if (getUserVisibleHint()) {
+            //TODO give the signal that the fragment is visible
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.setToolbar_status(0);
+            mainActivity.invalidateOptionsMenu();
+        }
     }
 }

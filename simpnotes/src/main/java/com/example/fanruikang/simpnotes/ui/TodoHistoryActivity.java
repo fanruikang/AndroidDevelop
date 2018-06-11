@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.example.fanruikang.simpnotes.R;
 import com.example.fanruikang.simpnotes.tool.LogUtil;
-import com.example.fanruikang.simpnotes.tool.RecyclerAdapter;
+import com.example.fanruikang.simpnotes.tool.TodoRecyclerAdapter;
 import com.example.fanruikang.simpnotes.tool.SimpleItemTodoHistoryTouchHelperCallback;
 import com.example.fanruikang.simpnotes.tool.TodoDatabase;
 
@@ -30,10 +30,10 @@ import java.util.List;
  * 修改备注：
  */
 
-public class TodoHistory extends BaseActivity {
+public class TodoHistoryActivity extends BaseActivity {
     final TodoDatabase TodoDatabase = new TodoDatabase(this,"TodoList.db",null,7 );
     List<String> datas = new ArrayList<String>();
-    private RecyclerAdapter recyclerAdapter;
+    private TodoRecyclerAdapter todoRecyclerAdapter;
     private static final int UPDATE_TODOLIST=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class TodoHistory extends BaseActivity {
         }
 
         dbreader.close();
-        LogUtil.d("TodoHistory", "initDatas");
+        LogUtil.d("TodoHistoryActivity", "initDatas");
 
     }
     @Override
@@ -93,21 +93,21 @@ public class TodoHistory extends BaseActivity {
     }
 
     public void init() {
-        LogUtil.d("TodoHistory", "init");
+        LogUtil.d("TodoHistoryActivity", "init");
         RecyclerView View = findViewById(R.id.rv_todo_history);
         View.addItemDecoration(new DividerItemDecoration(View.getContext(), LinearLayoutManager.VERTICAL));
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(View.getContext());
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
         View.setLayoutManager(linearLayoutManager);
-        recyclerAdapter = new RecyclerAdapter(datas, TodoDatabase) ;
+        todoRecyclerAdapter = new TodoRecyclerAdapter(datas, TodoDatabase) ;
 
         //先实例化Callback
-        ItemTouchHelper.Callback callback = new SimpleItemTodoHistoryTouchHelperCallback(recyclerAdapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTodoHistoryTouchHelperCallback(todoRecyclerAdapter);
         //用Callback构造ItemtouchHelper
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         touchHelper.attachToRecyclerView(View);
-        View.setAdapter(recyclerAdapter);
+        View.setAdapter(todoRecyclerAdapter);
     }
 }

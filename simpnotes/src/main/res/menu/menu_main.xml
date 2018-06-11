@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--分享菜单-->
+    <!--历史菜单-->
     <item
-        android:id="@+id/action_share"
+        android:id="@+id/action_history"
         android:icon="@drawable/history"
         android:orderInCategory="90"
         android:title="share"

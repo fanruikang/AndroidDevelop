@@ -175,15 +175,5 @@ public class TodoLinerLayout extends LinearLayout implements NestedScrollingPare
         LogUtil.d("TodoLinerLayout","ondraw");
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        switch (event.getAction()){
-//            case MotionEvent.ACTION_UP:
-//                LogUtil.d("TodoLinerLayout","ondraw"+todoView.getChildAt(0).getY());
-//                if (todoView.canScrollVertically(1)==false && todoView.getChildAt(0).getY()>(editText.getHeight()/2)){
-//                    this.setScrollY(300);
-//                }
-//        }
-//        return super.onTouchEvent(event);
-//    }
+
 }

@@ -26,10 +26,10 @@ import java.util.List;
  * 修改备注：
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> implements ItemTouchHelperAdapter {
+public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapter.VH> implements ItemTouchHelperAdapter {
     private List<String> mDatas;
     private TodoDatabase mDatabase;
-    public RecyclerAdapter(List<String> data, TodoDatabase Database) {
+    public TodoRecyclerAdapter(List<String> data, TodoDatabase Database) {
         this.mDatas = data;
         this.mDatabase = Database;
         Log.d("Recycleview", "adapter:"+mDatas.toString());
@@ -52,7 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtil.d("RecyclerAdapter","itemViewOnClick");
+                LogUtil.d("TodoRecyclerAdapter","itemViewOnClick");
 //                //item 点击事件
 //                TextView textView = (TextView)v.findViewById(R.id.content);
 //                textView.getPaint().setFlags((textView.getPaint().getFlags() == Paint.STRIKE_THRU_TEXT_FLAG) ? 0: Paint.STRIKE_THRU_TEXT_FLAG);
@@ -68,7 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
                 if (alarms.resolveActivity(v.getContext().getPackageManager()) != null) {
                     v.getContext().startActivity(alarms);
                 }
-                LogUtil.d("RecyclerAdapter","itemViewOnLongClick");
+                LogUtil.d("TodoRecyclerAdapter","itemViewOnLongClick");
 //                 final Calendar calendar = Calendar.getInstance();
 //                 new TimePickerDialog(v.getContext(),0, new TimePickerDialog.OnTimeSetListener() {
 //                    @Override
@@ -76,7 +76,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
 //                LogUtil.d("RecyclerAdapter77","onTimeSet");
 //                LogUtil.d("RecyclerAdapter77","onTimeSet"+hourOfDay+":::::"+minute);
 //
-//                        Intent intent = new Intent(view.getContext(), AlarmActivity.class);
+//                        Intent intent = new Intent(view.getContext(), EditNoteActivity.class);
 //                        TextView textView= (TextView) v.findViewById(R.id.content);
 //                        intent.putExtra("ToDo",textView.getText().toString());
 ////                        view.getContext().startActivity(intent);
@@ -100,7 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
         //交换位置
-                LogUtil.d("RecyclerAdapter","onItemMove");
+                LogUtil.d("TodoRecyclerAdapter","onItemMove");
         Collections.swap(mDatas,fromPosition,toPosition);
         notifyItemMoved(fromPosition,toPosition);
     }
@@ -108,7 +108,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
     @Override
     public void onItemAppear(int position) {
         //移除数据
-        LogUtil.d("RecyclerAdapter","onItemDissmiss");
+        LogUtil.d("TodoRecyclerAdapter","onItemDissmiss");
         ContentValues values = new ContentValues();
         values.put("isdeleted",0);
 
@@ -130,7 +130,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
     @Override
     public void onItemDissmiss(int position) {
         //移除数据
-                LogUtil.d("RecyclerAdapter","onItemDissmiss");
+                LogUtil.d("TodoRecyclerAdapter","onItemDissmiss");
         ContentValues values = new ContentValues();
         values.put("isdeleted",1);
 
@@ -172,7 +172,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.VH> im
         public TextView title;
         public VH(View v) {
             super(v);
-                LogUtil.d("RecyclerAdapter","viewHolder");
+                LogUtil.d("TodoRecyclerAdapter","viewHolder");
             title = (TextView) v.findViewById(R.id.content);
         }
     }

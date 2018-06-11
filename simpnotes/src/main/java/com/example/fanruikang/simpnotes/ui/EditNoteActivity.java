@@ -23,13 +23,13 @@ import java.io.IOException;
  * 修改备注：
  */
 
-public class AlarmActivity extends BaseActivity{
+public class EditNoteActivity extends BaseActivity{
     MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtil.d("AlarmActivity","onCreate");
+        LogUtil.d("EditNoteActivity","onCreate");
         mMediaPlayer = MediaPlayer.create(this, getSystemDefultRingtoneUri());
         mMediaPlayer.setLooping(false);
         try {
@@ -40,21 +40,21 @@ public class AlarmActivity extends BaseActivity{
             e.printStackTrace();
         }
         mMediaPlayer.start();
-        new AlertDialog.Builder(AlarmActivity.this, R.style.MyAlertDialogStyle)
+        new AlertDialog.Builder(EditNoteActivity.this, R.style.MyAlertDialogStyle)
                 .setTitle("ToDo")
                 .setMessage(getIntent().getStringExtra("ToDo").toString())
                 .setCancelable(false)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
-//                        AlarmActivity.this.finish();
+//                        EditNoteActivity.this.finish();
 //                        mMediaPlayer.stop();
                     }
                 })
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        AlarmActivity.this.finish();
+                        EditNoteActivity.this.finish();
                         mMediaPlayer.stop();
                     }
                 }).show();

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fanruikang.simpnotes.R;
+import com.example.fanruikang.simpnotes.tool.LogUtil;
 
 /**
  * 项目名称：AndroidDevelop
@@ -26,6 +27,7 @@ public class NoteBookFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtil.d("NoteBookFragment","onCreate");
     }
 
     /**
@@ -49,17 +51,49 @@ public class NoteBookFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        LogUtil.d("NoteBookFragment","onCreateView");
             View view = inflater.inflate(R.layout.simpnote_fragment_notebook,container,false);
     return view;
     }
 
     @Override
     public void onStart() {
+        LogUtil.d("NoteBookFragment","onStart");
         super.onStart();
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.initRvNotebook();
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if ((isVisibleToUser && isResumed())) {
+            LogUtil.d("NoteBookFragment","isVisibleToUser");
+            onResume();
+        } else if (!isVisibleToUser) {
+            LogUtil.d("NoteBookFragment","isNotVisibleToUser");
+            onPause();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        LogUtil.d("NoteBookFragment","onPause");
+        super.onPause();
 
     }
 
+    @Override
+    public void onResume() {
+        LogUtil.d("NoteBookFragment","onResume");
+        super.onResume();
+        if (getUserVisibleHint()) {
+            //TODO give the signal that the fragment is visible
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.setToolbar_status(1);
+            mainActivity.invalidateOptionsMenu();
 
+        }
+    }
 }

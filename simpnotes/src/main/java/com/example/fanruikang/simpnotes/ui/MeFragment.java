@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fanruikang.simpnotes.R;
+import com.example.fanruikang.simpnotes.tool.LogUtil;
 
 /**
  * 项目名称：AndroidDevelop
@@ -25,6 +26,7 @@ public class MeFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        LogUtil.d("MeFragment","onCreate");
         super.onCreate(savedInstanceState);
     }
 
@@ -49,15 +51,45 @@ public class MeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+            LogUtil.d("MeFragment","onCreateView");
             View view = inflater.inflate(R.layout.simpnote_fragment_me,container,false);
     return view;
     }
 
     @Override
     public void onStart() {
+        LogUtil.d("MeFragment","onStart");
+
         super.onStart();
-       ;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if ((isVisibleToUser && isResumed())) {
+            LogUtil.d("MeFragment","isVisibleToUser");
+            onResume();
+        } else if (!isVisibleToUser) {
+            LogUtil.d("MeFragment","isNotVisibleToUser");
+            onPause();
+        }
+    }
 
+    @Override
+    public void onPause() {
+        LogUtil.d("MeFragment","onPause");
+        super.onPause();
 
+    }
+
+    @Override
+    public void onResume() {
+        LogUtil.d("MeFragment","onResume");
+        super.onResume();
+        if (getUserVisibleHint()) {
+            //TODO give the signal that the fragment is visible
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.setToolbar_status(2);
+            mainActivity.invalidateOptionsMenu();
+        }
     }
 }

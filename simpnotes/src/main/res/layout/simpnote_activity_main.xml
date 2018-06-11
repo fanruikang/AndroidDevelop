@@ -71,7 +71,7 @@
 
     <!--<fragment-->
     <!--android:id="@+id/simpnote_fragment_item"-->
-    <!--android:name="com.example.fanruikang.simpnotes.ui.ItemFragment"-->
+    <!--android:nacom.example.fanruikang.simpnotes.ui.TodoFragmentment"-->
     <!--android:layout_width="0dp"-->
     <!--android:layout_height="0dp"-->
     <!--android:tag="simpnot_fragment"-->

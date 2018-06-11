@@ -32,6 +32,8 @@ public class TodoDatabase extends SQLiteOpenHelper {
                 db.execSQL("alter table todo add column isdeleted integer ");
             case 3:
                 db.execSQL("alter table todo add column time text");
+            case 4:
+                db.execSQL("alter table notebook add column time text");
             default:
 
         }
@@ -41,7 +43,7 @@ public class TodoDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table todo( id integer primary key autoincrement,content text,isdeleted integer,time text)");
-        db.execSQL("create table notebook( id integer primary key autoincrement,content text,isdeleted integer)");
+        db.execSQL("create table notebook( id integer primary key autoincrement,content text,isdeleted integer,time text)");
         Toast.makeText(mContext,"create succeeded",Toast.LENGTH_SHORT).show();
         String[] strings = new String[]{"下拉添加ToDo","左滑删除","右滑提醒"};
 
@@ -51,6 +53,7 @@ public class TodoDatabase extends SQLiteOpenHelper {
             values.put("isdeleted","0");
             values.put("time",System.currentTimeMillis());
             db.insert("todo", null,values );
+            db.insert("notebook", null,values );
         }
     }
 }

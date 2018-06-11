@@ -14,6 +14,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,55 +25,58 @@ import android.widget.EditText;
 
 import com.example.fanruikang.simpnotes.R;
 import com.example.fanruikang.simpnotes.tool.LogUtil;
-import com.example.fanruikang.simpnotes.tool.RecyclerAdapter;
 import com.example.fanruikang.simpnotes.tool.SimpleItemTouchHelperCallback;
 import com.example.fanruikang.simpnotes.tool.TabAdapter;
 import com.example.fanruikang.simpnotes.tool.TodoDatabase;
+import com.example.fanruikang.simpnotes.tool.TodoRecyclerAdapter;
+import com.example.fanruikang.simpnotes.tool.notebookRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
-    private TabLayout tab;
     private ViewPager viewpager;
     private TabAdapter adapter;
-    private RecyclerAdapter recyclerAdapter;
+    private static  int toolbar_status=0;
+    private TodoRecyclerAdapter todoRecyclerAdapter;
     private static final int UPDATE_TODOLIST = 1;
     private static final int START_TODOHISTORY=2;
+    private int ADD_NOTE=3;
+    List<String> datas = new ArrayList<String>();
+    List<String> books = new ArrayList<String>();
+    public static final String[] tabTitle = new String[]{"ToDo", "笔记本","我的"};
+//    private int[] selectors = new int[]{R.drawable.simpnote_buttombar_note_selector,R.drawable.simpnote_buttombar_habit_selector,R.drawable.simpnote_buttombar_notebook_selector,R.drawable.simpnote_buttombar_me_selector};
+    private int[] selectors = new int[]{R.drawable.simpnote_buttombar_note_selector,R.drawable.simpnote_buttombar_notebook_selector,R.drawable.simpnote_buttombar_me_selector};
+    final TodoDatabase TodoDatabase = new TodoDatabase(this,"TodoList.db",null,5 );
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-           switch (msg.what){
-               case UPDATE_TODOLIST:
-                   RecyclerView View = findViewById(R.id.rv_todo);
-                   View.addItemDecoration(new DividerItemDecoration(View.getContext(), LinearLayoutManager.VERTICAL));
-                   LinearLayoutManager linearLayoutManager=new LinearLayoutManager(View.getContext());
-                   linearLayoutManager.setStackFromEnd(true);
-                   linearLayoutManager.setReverseLayout(true);
-                   View.setLayoutManager(linearLayoutManager);
+            switch (msg.what){
+                case UPDATE_TODOLIST:
+                    RecyclerView View = findViewById(R.id.rv_todo);
+                    View.addItemDecoration(new DividerItemDecoration(View.getContext(), LinearLayoutManager.VERTICAL));
+                    LinearLayoutManager linearLayoutManager=new LinearLayoutManager(View.getContext());
+                    linearLayoutManager.setStackFromEnd(true);
+                    linearLayoutManager.setReverseLayout(true);
+                    View.setLayoutManager(linearLayoutManager);
 
-                   //设置item事件
-                   LogUtil.d("MainActivity", "query:"+datas.toString());
-                   recyclerAdapter = new RecyclerAdapter(datas, TodoDatabase) ;
+                    //设置item事件
+                    LogUtil.d("MainActivity", "query:"+datas.toString());
+                    todoRecyclerAdapter = new TodoRecyclerAdapter(datas, TodoDatabase) ;
 
-                   //先实例化Callback
-                   ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(recyclerAdapter);
-                   //用Callback构造ItemtouchHelper
-                   ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-                   //调用ItemTouchHelper的attachToRecyclerView方法建立联系
-                   touchHelper.attachToRecyclerView(View);
-                   View.setAdapter(recyclerAdapter);
-                   break;
-           }
+                    //先实例化Callback
+                    ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(todoRecyclerAdapter);
+                    //用Callback构造ItemtouchHelper
+                    ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+                    //调用ItemTouchHelper的attachToRecyclerView方法建立联系
+                    touchHelper.attachToRecyclerView(View);
+                    View.setAdapter(todoRecyclerAdapter);
+                    break;
+            }
         }
     };
-    List<String> datas = new ArrayList<String>();
-    public static final String[] tabTitle = new String[]{"ToDo", "笔记本","我的"};
-//    private int[] selectors = new int[]{R.drawable.simpnote_buttombar_note_selector,R.drawable.simpnote_buttombar_habit_selector,R.drawable.simpnote_buttombar_notebook_selector,R.drawable.simpnote_buttombar_me_selector};
-    private int[] selectors = new int[]{R.drawable.simpnote_buttombar_note_selector,R.drawable.simpnote_buttombar_notebook_selector,R.drawable.simpnote_buttombar_me_selector};
-    final TodoDatabase TodoDatabase = new TodoDatabase(this,"TodoList.db",null,7 );
 
     @Override
     protected void onResume() {
@@ -101,7 +105,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simpnote_activity_main);
-        initDatas();
         final Toolbar toolbar = findViewById(R.id.simpnote_note_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -111,85 +114,21 @@ public class MainActivity extends BaseActivity {
 //                case R.id.action_search://因为使用android.support.v7.widget.SearchView类，可以在onCreateOptionsMenu(Menu menu)中直接设置监听事件
 //                    Snackbar.make(toolbar,"Click Search",Snackbar.LENGTH_SHORT).show();
 //                    break;
-                    case R.id.action_share:
-//                        Snackbar.make(toolbar,"no history",Snackbar.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this,TodoHistory.class);
-                        startActivityForResult(intent,START_TODOHISTORY);
-                        break;
+                    case R.id.action_history:
+                        switch (toolbar_status){
+                            case 0:
+                                Intent intent = new Intent(MainActivity.this,TodoHistoryActivity.class);
+                                startActivityForResult(intent,START_TODOHISTORY);
+                                break;
+                            case 1:
+                                Intent intent1 = new Intent(MainActivity.this,AddNoteActivity.class);
+                                startActivityForResult(intent1,ADD_NOTE);
+                        }
                 }
                 return true;
             }
         });
         initviews();
-
-//
-//        query();
-//
-//        final EditText editText = findViewById(R.id.edit_todo);
-//        ViewTreeObserver viewTreeObserver = editText.getViewTreeObserver();
-//        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                EditText editText = findViewById(R.id.edit_todo);
-//                Rect rect = new Rect();
-//                editText.getGlobalVisibleRect(rect);
-//                String name = String.valueOf(editText.getText());
-//
-//                if (rect.bottom==0 && !name.equals("添加ToDo") && !name.equals("")){
-//                    insert(name);
-//                    LogUtil.d("MainActivity", "添加ToDo");
-//
-//                    Toast.makeText(MainActivity.this,"tianjiaotodo",Toast.LENGTH_SHORT).show();
-//                    query();
-//                    LogUtil.d("MainActivity", "edit_hide"+rect.bottom);
-//                    editText.setText("添加ToDo");
-//                }
-//
-//        }});
-//
-//        final ConstraintLayout constraintLayout = findViewById(R.id.cl_root);
-//        ViewTreeObserver viewTreeObserverll = constraintLayout.getViewTreeObserver();
-//
-//        viewTreeObserverll.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                String name = String.valueOf(editText.getText());
-//                Rect rect = new Rect();
-//                constraintLayout.getWindowVisibleDisplayFrame(rect);
-//                int screenHeight = constraintLayout.getRootView().getHeight();
-//                LogUtil.d("MainActivity", ""+rect.bottom+"关闭输入法"+screenHeight+name);
-//                if((screenHeight==rect.bottom) && ! name.equals("添加ToDo") && ! name.equals("")){
-////                    insert(name);
-//                    LogUtil.d("MainActivity", "关闭输入法自动保存");
-//                    View view = getLayoutInflater().inflate(R.layout.simpnote_fragment_todo_list,null);
-////                    view.scrollTo(0,300);
-//                    LogUtil.d("MainActivity", "RootLayoutchange"+view.getScrollY());
-//
-//                }
-//
-//
-//            }
-//        });
-//
-////        if (editText.getWindowVisibility())
-////        //弹出软键盘
-////        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-////            @Override
-////            public void onFocusChange(View v, boolean hasFocus) {
-////                if(v.isFocused()){
-////                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-////                }else {
-////                }
-////                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-////            }
-////        });
-//
-////        RecyclerView recyclerView = findViewById(R.id.listview);
-////        recyclerView.scrollTo(0,700);
-////        recyclerView.scrollToPosition(2);
-////        recyclerView.setTranslationY(0);
-
-
     }
 
     @Override
@@ -199,13 +138,31 @@ public class MainActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+            MenuItem menuItem = menu.findItem(R.id.action_history);
+            switch (toolbar_status){
+                case 0:
+                    menuItem.setIcon(R.drawable.history);
+                    break;
+                case 1:
+                    menuItem.setIcon(R.drawable.add);
+                    break;
+                case 2:
+                    menuItem.setVisible(false);
+            }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void initviews() {
-        tab = (TabLayout) findViewById(R.id.tab);
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        TabLayout tab = findViewById(R.id.tab);
+        viewpager = findViewById(R.id.viewpager);
 
         List<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(new ItemFragment());
+        fragments.add(new TodoFragment());
         fragments.add(new NoteBookFragment());
         fragments.add(new MeFragment());
 
@@ -227,13 +184,9 @@ public class MainActivity extends BaseActivity {
                 switch (position){
                     case 0:
                         query();
-//                        TextView textView = findViewById(R.id.tab_text);
-//                        textView.setTextColor(0xe500ff00);
                         break;
 
                     case 1:
-//                        TextView textView1 = findViewById(R.id.tab_text);
-//                        textView1.setTextColor(0xe500ff00);
                         break;
 
                 }
@@ -270,15 +223,15 @@ public class MainActivity extends BaseActivity {
 //
 //        //设置item事件
 //        LogUtil.d("MainActivity", "query:"+datas.toString());
-//        recyclerAdapter = new RecyclerAdapter(datas,TodoDatabase) ;
+//        todoRecyclerAdapter = new TodoRecyclerAdapter(datas,TodoDatabase) ;
 //
 //        //先实例化Callback
-//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(recyclerAdapter);
+//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(todoRecyclerAdapter);
 //        //用Callback构造ItemtouchHelper
 //        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
 //        //调用ItemTouchHelper的attachToRecyclerView方法建立联系
 //        touchHelper.attachToRecyclerView(View);
-//        View.setAdapter(recyclerAdapter);
+//        View.setAdapter(todoRecyclerAdapter);
 
     }
     private void rightToInsert(){
@@ -312,24 +265,25 @@ public class MainActivity extends BaseActivity {
 
                 datas.clear();
                 SQLiteDatabase dbreader = TodoDatabase.getReadableDatabase();
-                Cursor cursor = dbreader.rawQuery(getString(R.string.selectingtodo),
-                        new String[]{"0"});
-
+                Cursor cursor = dbreader.rawQuery(getString(R.string.selectingtodo),new String[]{"0"});
                 if (cursor.moveToFirst()) {
                     do {
-                        datas.add(cursor.getString(cursor.getColumnIndex(
-
-
-                                "content")));
+                        datas.add(cursor.getString(cursor.getColumnIndex("content")));
                     } while (cursor.moveToNext());
                 }
-
+               Cursor cursorbook = dbreader.rawQuery(getString(R.string.selectingnotebook),new String[]{"0"});
+                if (cursorbook.moveToFirst()) {
+                      do {
+                          books.add(cursorbook.getString(cursorbook.getColumnIndex("content")));
+                      } while (cursorbook.moveToNext());
+                  }
                 dbreader.close();
                 LogUtil.d("MainActivity", "initDatas");
 
             }
     public void init(){
         LogUtil.d("MainActivity","Init");
+        initDatas();
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -355,28 +309,40 @@ public class MainActivity extends BaseActivity {
 //            }
 //        }).start();
         RecyclerView View = findViewById(R.id.rv_todo);
-        View.addItemDecoration(new DividerItemDecoration(View.getContext(), LinearLayoutManager.VERTICAL));
+        //添加分割线
+//        View.addItemDecoration(new DividerItemDecoration(View.getContext(), LinearLayoutManager.VERTICAL));
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(View.getContext());
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
         View.setLayoutManager(linearLayoutManager);
-        recyclerAdapter = new RecyclerAdapter(datas, TodoDatabase) ;
+        todoRecyclerAdapter = new TodoRecyclerAdapter(datas, TodoDatabase) ;
 
         //先实例化Callback
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(recyclerAdapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(todoRecyclerAdapter);
         //用Callback构造ItemtouchHelper
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         //调用ItemTouchHelper的attachToRecyclerView方法建立联系
         touchHelper.attachToRecyclerView(View);
-        View.setAdapter(recyclerAdapter);
+        View.setAdapter(todoRecyclerAdapter);
 //        Message message = new Message();
 //        message.what = UPDATE_TODOLIST;
 //        handler.sendMessage(message);
     }
 
-    public void query() { //查询
-        recyclerAdapter.notifyDataSetChanged();
+    public void setToolbar_status(int sta){
+        toolbar_status=sta;
     }
 
+    public void query() { //查询
+        todoRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    public void initRvNotebook() {
+        RecyclerView View = findViewById(R.id.rv_notebooks);
+//        View.addItemDecoration(new DividerItemDecoration(View.getContext(), LinearLayoutManager.VERTICAL));
+        View.setLayoutManager(new GridLayoutManager(this,3));
+        notebookRecyclerAdapter notebookRecyclerAdapter = new notebookRecyclerAdapter(books);
+        View.setAdapter(notebookRecyclerAdapter);
+    }
 }
 
